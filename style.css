@@ -1,0 +1,59 @@
+/* ApexStudio Styles - Preserving Professional Color Palette */
+
+:root {
+  --apex-dark: #000000;         /* Primary Dark */
+  --apex-teal: #0F7173;         /* Primary Brand Color */
+  --apex-light-teal: #169A9D;   /* Hover/Accent */
+  --apex-green: #27ae60;        /* Success Color */
+  --apex-bg: #f8f9fa;           /* Light Grey BG */
+}
+
+body {
+    background-color: var(--apex-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Bootstrap Override Strategy --- */
+/* We map Bootstrap semantic classes to ApexStudio colors */
+
+.bg-dark { background-color: var(--apex-dark) !important; }
+.bg-primary { background-color: var(--apex-teal) !important; }
+.text-primary { color: var(--apex-teal) !important; }
+.text-success { color: var(--apex-green) !important; }
+.border-primary { border-color: var(--apex-teal) !important; }
+.border-success { border-color: var(--apex-green) !important; }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--apex-teal);
+    border-color: var(--apex-teal);
+}
+.btn-primary:hover {
+    background-color: var(--apex-light-teal);
+    border-color: var(--apex-light-teal);
+}
+
+/* Marquee */
+.promo-banner-wrapper {
+  background: linear-gradient(90deg, var(--apex-teal), var(--apex-light-teal));
+  color: white;
+  padding: 8px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Cards */
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Footer Links */
+.footer-heading {
+    color: var(--apex-teal);
+    font-weight: 700;
+}
+.social-icons a:hover {
+    color: var(--apex-light-teal) !important;
+}
