@@ -15,6 +15,9 @@ This project demonstrates advanced web design principles, including responsive l
 * **Data Views:** Includes a master booking table view (`listbooking.html`) and a responsive services catalog grid (`listservices.html`).
 * **Content Pages:** Dedicated About Us and Contact pages (`about.html`, `contact.html`).
 * **Responsive Design:** Fully optimized for both desktop and mobile devices using Bootstrap 5 grid and utilities.
+* **Enhanced Navigation & Usability (New):**
+  	* **Scroll-to-Top Button:** A persistent arrow button that allows users to smoothly scroll back to the top of the page with a single click.
+  	* **Logo Redirection:** The ApexStudio logo in the navigation bar is configured to redirect the user instantly to the Dashboard (dashboard.html) from any page, except login page(index.html) & register page (register.html).
 
 ## 3. Technologies & Frameworks Used
 * **HTML5, CSS3, JavaScript:** Core programming languages.
