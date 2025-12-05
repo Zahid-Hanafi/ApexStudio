@@ -57,3 +57,27 @@ body {
 .social-icons a:hover {
     color: var(--apex-light-teal) !important;
 }
+
+   .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0F7173;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 999;
+    }
+
+    .scroll-top:hover {
+      background-color: #169A9D;
+      transform: translateY(-5px);
+    }
+
+

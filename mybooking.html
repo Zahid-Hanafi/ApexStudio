@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <style>
-        /* Simple Calendar Styles for Prototype */
+        
         .calendar-day {
             height: 100px;
             border: 1px solid #dee2e6;
@@ -17,7 +17,7 @@
             background-color: #fff;
         }
         .calendar-day.booked {
-            background-color: #ffebee; /* Light red for booked */
+            background-color: #ffebee; 
             color: #dc3545;
         }
         .calendar-day.booked::after {
@@ -32,15 +32,21 @@
             cursor: pointer;
         }
         .calendar-day.available:hover {
-            background-color: #e0f2f1; /* Light teal hover */
+            background-color: #e0f2f1; 
         }
     </style>
+    <link rel="icon" type="png" href="images/logo.png" sizes="512x512">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-primary">
         <div class="container">
-            <a class="navbar-brand" href="dashboard.html">📷 ApexStudio</a>
+            <td >
+                <a href="dashboard.html">
+          <img src="images/logo.png" height="50" width="80">
+          </a>
+        </td>
+            <a class="navbar-brand" href="dashboard.html">ApexStudio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -62,7 +68,9 @@
 
     <div class="promo-banner-wrapper">
         <marquee behavior="scroll" direction="left" scrollamount="8" class="text-uppercase fw-bold">
-         🎉 New Year Sale! Enjoy 10% OFF on all package! | 💥 Exclusive Offer: 15% OFF for New Customers! | 🛒 Booking Now and Save Big! | 🚚 Free Shipping for Peninsular Malaysia.
+         🎉 New Year Sale! Enjoy 10% OFF on all package! | 💥 Exclusive Offer: 15% OFF for New Customers! | 🛒 Booking Now and Save Big! | 🚚 Free Shipping Physical Image for Peninsular Malaysia.
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         🎉 New Year Sale! Enjoy 10% OFF on all package! | 💥 Exclusive Offer: 15% OFF for New Customers! | 🛒 Booking Now and Save Big! | 🚚 Free Shipping Physical Image for Peninsular Malaysia.
         </marquee>
     </div>
 
@@ -189,10 +197,13 @@
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initBookingSystem(); // Load data
-            renderMyBookings();  // Show user table
-            renderCalendar();    // Show calendar visual
+            initBookingSystem(); // untuk Load data
+            renderMyBookings();  // untuk Show user table
+            renderCalendar();    // untuk Show calendar visual
         });
     </script>
 </body>
+  <div class="scroll-top" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </div>
 </html>

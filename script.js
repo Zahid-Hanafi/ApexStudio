@@ -1,9 +1,3 @@
-/* ApexStudio Main Logic 
-   - Handles: Auth, Charts, User Display, and Booking System
-   - NOW INCLUDES: Dynamic Chart Calculation from Real Data
-*/
-
-// --- 1. EXPANDED PRESET DATA (30 Entries across 2025) ---
 const presetBookings = [
     { date: '2025-01-15', service: 'Wedding Photography', user: 'Upin', status: 'Completed' },
     { date: '2025-01-20', service: 'Profile Photoshoot', user: 'Ipin', status: 'Completed' },
@@ -25,7 +19,6 @@ const presetBookings = [
     { date: '2025-10-25', service: 'Newborn Photoshoot', user: 'Hagemaru', status: 'Completed' },
     { date: '2025-11-11', service: 'Fashion & Product', user: 'Shin Chan', status: 'Completed' },
     { date: '2025-11-20', service: 'Family Portrait', user: 'Didi', status: 'Completed' },
-    // December (Peak Season for Demo)
     { date: '2025-12-01', service: 'Wedding Photography', user: 'Nana', status: 'Pending' },
     { date: '2025-12-05', service: 'Convocation', user: 'Jojo', status: 'Confirmed' },
     { date: '2025-12-10', service: 'Newborn Photoshoot', user: 'Pak Atan', status: 'Pending' },
@@ -97,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const service = document.getElementById('bookService').value;
             const currentUser = localStorage.getItem('apex_name') || 'Guest User';
             
-            // Validation
+            
             const allBookings = JSON.parse(localStorage.getItem('apex_bookings'));
             const isTaken = allBookings.some(b => b.date === date);
 
@@ -105,9 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('dateError').classList.remove('d-none');
             } else {
                 document.getElementById('dateError').classList.add('d-none');
-                // Status defaults to Confirmed for user bookings
+                
                 allBookings.push({ date: date, service: service, user: currentUser, status: 'Confirmed' });
-                // Re-sort data by date
+                
                 allBookings.sort((a, b) => new Date(a.date) - new Date(b.date));
                 localStorage.setItem('apex_bookings', JSON.stringify(allBookings));
                 alert('Booking Confirmed!');
@@ -116,13 +109,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 6. RENDER TABLES (if present)
+    // 6. RENDER TABLES 
     if (document.getElementById('allBookingsTableBody')) renderAllBookings();
     if (document.getElementById('myBookingTable')) renderMyBookings();
     if (document.getElementById('calendarGrid')) renderCalendar();
 });
 
-// --- HELPER FUNCTIONS ---
+
 
 function initBookingSystem() {
     if (!localStorage.getItem('apex_bookings')) {
@@ -133,13 +126,11 @@ function initBookingSystem() {
 function updateDashboardStats() {
     const bookings = JSON.parse(localStorage.getItem('apex_bookings')) || [];
     
-    // Calculate Stats
+
     const total = bookings.length;
     const completed = bookings.filter(b => b.status === 'Completed').length;
     const pending = bookings.filter(b => b.status === 'Pending').length;
-    // 'Confirmed' bookings are active but not completed or pending. 
-    // You might want to sum Confirmed + Completed or keep separate.
-    // For this prototype, let's keep it simple:
+
     
     document.getElementById('totalCount').innerText = total;
     document.getElementById('pendingCount').innerText = pending;
@@ -149,19 +140,19 @@ function updateDashboardStats() {
 function renderCharts() {
     const bookings = JSON.parse(localStorage.getItem('apex_bookings')) || [];
 
-    // 1. Process Data for Bar Chart (Monthly)
-    const monthCounts = new Array(12).fill(0); // [0,0,0,0,0,0,0,0,0,0,0,0]
+    
+    const monthCounts = new Array(12).fill(0); 
     bookings.forEach(b => {
-        const monthIndex = new Date(b.date).getMonth(); // 0 = Jan, 11 = Dec
+        const monthIndex = new Date(b.date).getMonth(); 
         if (!isNaN(monthIndex)) {
             monthCounts[monthIndex]++;
         }
     });
 
-    // 2. Process Data for Pie Chart (Services)
+    
     const serviceMap = {};
     bookings.forEach(b => {
-        // Group similar names (e.g. "Wedding Photography" vs "Wedding")
+        
         let key = b.service; 
         if(serviceMap[key]) {
             serviceMap[key]++;
@@ -170,11 +161,11 @@ function renderCharts() {
         }
     });
     
-    // Extract labels and data for Pie Chart
+    
     const serviceLabels = Object.keys(serviceMap);
     const serviceData = Object.values(serviceMap);
 
-    // --- RENDER BAR CHART ---
+    
     const ctxBar = document.getElementById('monthlyChart');
     if (ctxBar) {
         new Chart(ctxBar, {
@@ -183,7 +174,7 @@ function renderCharts() {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Bookings per Month',
-                    data: monthCounts, // Dynamic Data!
+                    data: monthCounts, 
                     backgroundColor: '#0F7173', // Apex Teal
                     borderColor: '#0F7173',
                     borderWidth: 1,
@@ -196,30 +187,30 @@ function renderCharts() {
                 scales: {
                     y: { 
                         beginAtZero: true,
-                        ticks: { stepSize: 1 } // Ensure whole numbers
+                        ticks: { stepSize: 1 } 
                     }
                 }
             }
         });
     }
 
-    // --- RENDER PIE CHART ---
+    
     const ctxPie = document.getElementById('serviceChart');
     if (ctxPie) {
         new Chart(ctxPie, {
             type: 'doughnut',
             data: {
-                labels: serviceLabels, // Dynamic Labels
+                labels: serviceLabels, 
                 datasets: [{
-                    data: serviceData, // Dynamic Data
+                    data: serviceData, 
                     backgroundColor: [
-                        '#0F7173', // Teal
-                        '#169A9D', // Light Teal
-                        '#27ae60', // Green
-                        '#2c3e50', // Dark
-                        '#95a5a6', // Grey
-                        '#e67e22', // Orange (extra)
-                        '#8e44ad'  // Purple (extra)
+                        '#0F7173', 
+                        '#169A9D', 
+                        '#27ae60', 
+                        '#2c3e50', 
+                        '#95a5a6', 
+                        '#e67e22', 
+                        '#8e44ad'  
                     ],
                     hoverOffset: 4
                 }]
@@ -289,8 +280,7 @@ function renderCalendar() {
     const grid = document.getElementById('calendarGrid');
     if (!grid) return;
     const bookings = JSON.parse(localStorage.getItem('apex_bookings'));
-    // Filter for Dec 2025 to match the visual calendar label
-    // (In a real app, you'd change the month view, but this is a prototype)
+
     const bookedDates = bookings.map(b => b.date);
     
     for (let i = 1; i <= 31; i++) {
@@ -303,4 +293,35 @@ function renderCalendar() {
 
 function logout() {
     if(confirm('Log out?')) window.location.href = 'index.html';
+}
+
+
+
+function scrollToTop() {
+    const duration = 1200; 
+    const start = window.scrollY;
+    const startTime = performance.now();
+
+    
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animation(currentTime) {
+        const timeElapsed = currentTime - startTime;
+        let progress = timeElapsed / duration;
+
+        
+        if (progress > 1) progress = 1;
+
+        const val = easeOutCubic(progress);
+
+        window.scrollTo(0, start * (1 - val));
+
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
 }
